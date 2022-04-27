@@ -107,7 +107,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Robot'
+              $ref: '#/components/schemas/PostRobot'
             examples:
               createRobot:
                 $ref: '#/components/examples/createRobot'
@@ -846,6 +846,60 @@ components:
           format: int32
           description: Id of robot
           example: 1
+        name:
+          type: string
+          description: Name of robot
+          example: Terminator
+        model:
+          type: string
+          description: Model of robot
+          example: Turtlebot
+        serial_number:
+          type: string
+          description: Serial number of the robot
+          example: CE0460ROBOT
+        host:
+          type: string
+          description: Host address where the robot ISAR instance is reachable
+          example: localhost
+        port:
+          type: integer
+          format: int32
+          description: Port on the host in which the robot ISAR instance is reachable
+          example: 3000
+        enabled:
+          type: boolean
+          description: Wheter the robot is enabled and available for scheduling missions
+          example: true
+        status:
+          type: string
+          description: Status of robot
+          enum:
+          - available
+          - offline
+          - mission_in_progress
+        capabilities:
+          type: array
+          items:
+            type: string
+            description: Valid inspection types
+            enum:
+            - thermal_image
+            - image
+            - audio
+      additionalProperties: false
+    PostRobot:
+      type: object
+      required:
+      - name
+      - model
+      - serial_number
+      - status
+      - host
+      - port
+      - enabled
+      - capabilities
+      properties:
         name:
           type: string
           description: Name of robot
